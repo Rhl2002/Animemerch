@@ -10,9 +10,6 @@ import { AiOutlineReload } from "react-icons/ai";
 import { Prices } from "../components/Prices";
 import SearchInput from "../components/Form/SearchInput";
 
-
-
-
 const CategoryProduct = () => {
   const params = useParams();
   const navigate = useNavigate();
@@ -26,13 +23,9 @@ const CategoryProduct = () => {
   const [total, setTotal] = useState(0);
   const [cart, setCart] = useCart();
 
-
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
-
-
-
 
   useEffect(() => {
     if (params?.slug) getPrductsByCat();
@@ -123,8 +116,8 @@ const CategoryProduct = () => {
     if (checked.length || radio.length) filterProduct();
   }, [checked, radio]);
 
-   //get filterd product
-   const filterProduct = async () => {
+  //get filterd product
+  const filterProduct = async () => {
     try {
       const { data } = await axios.post("/api/v1/product/product-filters", {
         checked,
@@ -137,12 +130,11 @@ const CategoryProduct = () => {
   };
   return (
     <Layout>
-
       <div className="container-fluid row mt-3 home-page ">
         <div className="col-md-3 mt-5 filters">
-                <div className="card d-flex justify-content-center align-items-center mx-auto">
-                <SearchInput />
-                </div>
+          <div className="card d-flex justify-content-center align-items-center mx-auto">
+            <SearchInput />
+          </div>
 
           <h4 className="text-center mt-4">Filter By Price</h4>
           <div className="d-flex flex-column">
@@ -164,52 +156,50 @@ const CategoryProduct = () => {
           </div>
         </div>
 
-
         <div className="col-md-9 ">
-        <h4 className="text-center">Category - {products?.product_type}</h4>
-        <h6 className="text-center">{products?.length} result found </h6>
-        <div className="row">
-          <div className="col-md-9 offset-1">   
-            <div className="d-flex flex-wrap">    
-              {products?.map((p) => (
-                <div className="card m-2" key={p._id}>
-                  <img
-                    src={`/api/v1/product/product-photo/${p._id}`}
-                    className="card-img-top"
-                    alt={p.name}
-                  />
-                  <div className="card-body bg-white">
-                    <div className="card-name-price">
-                      <h5 className="card-title fw-semibold">{capitalizeFirstLetter(p.name.substring(0,20))}...
-                      </h5>
-                      <h5 className="card-title card-price">
-                        {p.price.toLocaleString("en-US", {
-                          style: "currency",
-                          currency: "INR",
-                        })}
-                      </h5>
-                    </div>
-                    <p className="card-text ">
-                      {p.description.substring(0, 50)}...
-                    </p>
-                    <div className="card-name-price">
-                      <button
-                        className="btn btn-danger ms-1"
-                        onClick={() => navigate(`/product/${p.slug}`)}
-                      >
-                        More Details
-                      </button>
+          <h4 className="text-center">Category - {products?.product_type}</h4>
+          <h6 className="text-center">{products?.length} result found </h6>
+          <div className="row">
+            <div className="col-md-9 offset-1">
+              <div className="d-flex flex-wrap">
+                {products?.map((p) => (
+                  <div className="card m-2" key={p._id}>
+                    <img
+                      src={`/api/v1/product/product-photo/${p._id}`}
+                      className="card-img-top"
+                      alt={p.name}
+                    />
+                    <div className="card-body bg-white">
+                      <div className="card-name-price">
+                        <h5 className="card-title fw-semibold">
+                          {capitalizeFirstLetter(p.name.substring(0, 20))}...
+                        </h5>
+                        <h5 className="card-title card-price">
+                          {p.price.toLocaleString("en-US", {
+                            style: "currency",
+                            currency: "INR",
+                          })}
+                        </h5>
+                      </div>
+                      <p className="card-text ">
+                        {p.description.substring(0, 50)}...
+                      </p>
+                      <div className="card-name-price">
+                        <button
+                          className="btn btn-danger ms-1"
+                          onClick={() => navigate(`/product/${p.slug}`)}
+                        >
+                          More Details
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </div>
-      </div>
-
-      
     </Layout>
   );
 };

@@ -35,7 +35,7 @@ const SearchInput = () => {
           value={values.keyword}
           onChange={(e) => setValues({ ...values, keyword: e.target.value })}
         />
-        <span className="input-group-text p-2" id="basic-addon2" style={{background: "#F8EA54"}}><BsSearch className='fs-6'/></span>
+        <span className="input-group-text p-2" id="basic-addon2" style={{background: "#F8EA54" ,cursor:"pointer"}}><BsSearch className='fs-6' onClick={handleSubmit} /></span>
 
       </form>
     </div>
