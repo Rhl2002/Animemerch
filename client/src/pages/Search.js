@@ -17,7 +17,7 @@ const Search = () => {
     <Layout title={"Search results"}>
       <div className="container">
         <div className="text-center">
-          <h1>Search Resuts</h1>
+          <h1>Search Results</h1>
           <h6>
             {values?.results.length < 1
               ? "No Products Found"
@@ -44,12 +44,12 @@ const Search = () => {
                     More Details
                   </button>
                   <button
-                    className="btn btn-danger fw-bold mt-2"
+                    className="btn btn-danger fw-bold"
                     onClick={() => {
-                      setCart([...cart, product]);
+                      setCart([...cart, p]);
                       localStorage.setItem(
                         "cart",
-                        JSON.stringify([...cart, product])
+                        JSON.stringify([...cart, p])
                       );
                       toast.success("Item Added to cart");
                     }}
