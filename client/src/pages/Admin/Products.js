@@ -12,9 +12,10 @@ const Products = () => {
     try {
       const { data } = await axios.get("/api/v1/product/get-product");
       setProducts(data.products);
+      // Only 12 products are fetched because in productContoller.js we have limited it to 12
     } catch (error) {
       console.log(error);
-      toast.error("Someething Went Wrong");
+      toast.error("Something Went Wrong");
     }
   };
 
