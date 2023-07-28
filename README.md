@@ -1,0 +1,1 @@
+steps to run the project locally in your computer :
