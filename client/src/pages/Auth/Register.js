@@ -48,7 +48,7 @@ const Register = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="form-control"
-              id="exampleInputEmail1"
+              id="name"
               placeholder="Enter Your Name"
               required
               autoFocus
@@ -60,7 +60,7 @@ const Register = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="form-control"
-              id="exampleInputEmail1"
+              id="email"
               placeholder="Enter Your Email "
               required
             />
@@ -71,7 +71,7 @@ const Register = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="form-control"
-              id="exampleInputPassword1"
+              id="password"
               placeholder="Enter Your Password"
               required
             />
@@ -82,7 +82,7 @@ const Register = () => {
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               className="form-control"
-              id="exampleInputEmail1"
+              id="phone"
               placeholder="Enter Your Phone"
               required
             />
@@ -93,7 +93,7 @@ const Register = () => {
               value={address}
               onChange={(e) => setAddress(e.target.value)}
               className="form-control"
-              id="exampleInputEmail1"
+              id="address"
               placeholder="Enter Your Address"
               required
             />
@@ -104,7 +104,7 @@ const Register = () => {
               value={answer}
               onChange={(e) => setAnswer(e.target.value)}
               className="form-control"
-              id="exampleInputEmail1"
+              id="answer"
               placeholder="What is Your Favorite sport"
               required
             />
