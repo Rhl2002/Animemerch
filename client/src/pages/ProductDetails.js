@@ -7,9 +7,11 @@ import Button from "react-bootstrap/Button";
 import { FiShoppingBag } from "react-icons/fi";
 import { toast } from "react-hot-toast";
 import { useCart } from "../context/cart";
+import { useAuth } from "../context/auth";
 
 const ProductDetails = () => {
   const [cart, setCart] = useCart();
+  const [auth, setAuth] = useAuth();
   const params = useParams();
   const navigate = useNavigate();
   const [product, setProduct] = useState({});
@@ -42,6 +44,41 @@ const ProductDetails = () => {
       console.log(error);
     }
   };
+
+  const addToCart = async (pid) => {
+    try {
+      if(auth?.user ===null || auth?.user ==="null"){
+        toast.success("Please Login");
+        return;
+      }
+      const {data, Cart }  = await axios.post(`/api/v1/cart/create-cart/${auth?.user._id}/${pid}`);  
+      // console.log("Data  is " ,data , "Cart is" , data.Cart);
+      if(data.success === true){
+        // console.log("cart before added ",data.Cart);
+        // setCart((prev) => [data.cart]);
+        // so basically what was happening is that we were getting object as a response from backend but on frontend we consider cart as a array ,so thats why we were getting error of undefined properties 
+        // the fix used is i created a array pushed the object and then updated the cart state and now everything works perfectly .
+        let my=[]
+        my.push(data.Cart);
+        // setCart(data.Cart); ///main line'
+        setCart(my); ///main line'
+        // console.log("cart after added ",cart,"my is ",my);
+        toast.success("Item Added to cart");
+      }
+      else{
+        toast.error("Invalid");
+      }
+      // window.location.reload();
+      
+      // setCart([...cart, p]);
+      // localStorage.setItem(
+      //   "cart",
+      //   JSON.stringify([...cart, p])
+      // );
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <Layout>
       <div className="my-5">
@@ -69,11 +106,7 @@ const ProductDetails = () => {
           {/* <Button variant="danger" className="fw-bold"><FiShoppingBag className="me-2"/>ADD TO BAG</Button> */}
           <button
             className="btn btn-danger fw-bold"
-            onClick={() => {
-              setCart([...cart, product]);
-              localStorage.setItem("cart", JSON.stringify([...cart, product]));
-              toast.success("Item Added to cart");
-            }}
+            onClick={() => addToCart(product?._id)}
           >
             <FiShoppingBag className="me-2" />
             ADD TO CART
@@ -116,14 +149,7 @@ const ProductDetails = () => {
                   </button>
                   <button
                     className="btn btn-dark ms-1"
-                    onClick={() => {
-                      setCart([...cart, p]);
-                      localStorage.setItem(
-                        "cart",
-                        JSON.stringify([...cart, p])
-                      );
-                      toast.success("Item Added to cart");
-                    }}
+                    onClick={() => addToCart(p._id)}
                   >
                     ADD TO CART
                   </button>

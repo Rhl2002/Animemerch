@@ -8,7 +8,7 @@ import { Badge } from "antd";
 
 const Header = () => {
   const [auth, setAuth] = useAuth();
-  const [cart] = useCart();
+  const [cart, setCart] = useCart();
   const categories = useCategory();
   const handleLogout = () => {
     setAuth({
@@ -18,6 +18,20 @@ const Header = () => {
     });
     localStorage.removeItem("auth");
     toast.success("Logout Successfully");
+  };
+
+  const countFunc = () => {
+    if (cart?.length === 0) {
+      return 0;
+    } else {
+      if (cart !== undefined && cart[0] !== undefined) {
+        let c = cart[0]?.products?.length;
+        // console.log("cart is ", cart, "count is ", c);
+        return c;
+      } else {
+        return 0;
+      }
+    }
   };
   return (
     <>
@@ -134,7 +148,7 @@ const Header = () => {
               </li>
               <li className="nav-item ">
                 <NavLink to="/cart" className="nav-link">
-                  <Badge count={cart?.length} showZero offset={[10, -5]} className="text-white">
+                  <Badge count={countFunc()} showZero  className="text-white">
                     Cart
                   </Badge>
                 </NavLink>

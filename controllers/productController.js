@@ -101,8 +101,27 @@ export const getSingleProductController = async (req, res) => {
     console.log(error);
     res.status(500).send({
       success: false,
-      message: "Eror while getitng single product",
+      message: "Eror while getting single product",
       error,
+    });
+  }
+};
+
+export const getSingleProductByIdController = async (req, res) => {
+  try {
+    // const {slug} = req.body;
+    const product = await productModel
+      .findById(req.params.id)
+      .select("-photo");
+    res.status(200).send({
+      product
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      error: error.message,
+      message: "Error in fetching single product",
     });
   }
 };
@@ -339,6 +358,11 @@ export const braintreeTokenController = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
+    res.status(400).send({
+      success: false,
+      error,
+      message: "Error in Token Controller",
+    });
   }
 };
 
@@ -346,10 +370,8 @@ export const braintreeTokenController = async (req, res) => {
 export const brainTreePaymentController = async (req, res) => {
   try {
     const { nonce, cart } = req.body;
-    let total = 0;
-    cart.map((i) => {
-      total += i.price;
-    });
+    console.log("cart is",cart)
+    let total = cart[0].total;
     let newTransaction = gateway.transaction.sale(
       {
         amount: total,
@@ -361,7 +383,7 @@ export const brainTreePaymentController = async (req, res) => {
       function (error, result) {
         if (result) {
           const order = new orderModel({
-            products: cart,
+            products: cart[0].products,
             payment: result,
             buyer: req.user._id,
           }).save();
@@ -373,5 +395,10 @@ export const brainTreePaymentController = async (req, res) => {
     );
   } catch (error) {
     console.log(error);
+    res.status(400).send({
+      success: false,
+      error,
+      message: "Error in Payment Controller",
+    });
   }
 };
