@@ -5,7 +5,7 @@ import { useAuth } from "../context/auth";
 import { useNavigate } from "react-router-dom";
 import DropIn from "braintree-web-drop-in-react";
 import axios from "axios";
-import {toast} from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import "../styles/CartStyles.css";
 
 const CartPage = () => {
@@ -59,7 +59,6 @@ const CartPage = () => {
     // window.location.reload();
     //setMy(...products);
   }, [cart]);
-
 
   //total price
   const totalPrice = () => {
@@ -147,7 +146,7 @@ const CartPage = () => {
       const { nonce } = await instance.requestPaymentMethod();
       const { data } = await axios.post("/api/v1/product/braintree/payment", {
         nonce,
-        cart, 
+        cart,
       });
       setLoading(false);
       localStorage.removeItem("cart");
@@ -205,23 +204,23 @@ const CartPage = () => {
                       {/* <p>{p[0].description.substring(0, 30)}</p> */}
                       <p>Price : {p[0].price}</p>
                       <p>Quantity : {cart[0]?.products[idx]?.quantity}</p>
-
-                      <button
-                    className="btn btn-primary "
-                    onClick={() => removeCartItem(p[0]._id)}
-                  >
-                    Remove
-                  </button>
-                  <button
-                    className="btn btn-danger cart-remove-btn "
-                    onClick={() => removeWholeCartItem(p[0]._id)}
-                  >
-                    Remove All
-                  </button>
-                    </div>
-                    <div className="col-md-4 cart-remove-btn">
                       
+                      <div className="d-flex justify-content-between">
+                      <button
+                        className="btn btn-primary p-3 "
+                        onClick={() => removeCartItem(p[0]._id)}
+                      >
+                        Remove
+                      </button>
+                      <button
+                        className="btn btn-danger cart-remove-btn d-flex right-0 "
+                        onClick={() => removeWholeCartItem(p[0]._id)}
+                      >
+                        Remove All
+                      </button>
+                      </div>
                     </div>
+                    <div className="col-md-4 cart-remove-btn"></div>
                   </div>
                 ))}
               </div>
@@ -267,7 +266,7 @@ const CartPage = () => {
                   </div>
                 )}
                 <div className="mt-2">
-                  {!clientToken  ? (
+                  {!clientToken ? (
                     ""
                   ) : (
                     <>
