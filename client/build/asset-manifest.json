@@ -1,0 +1,43 @@
+{
+  "files": {
+    "main.css": "/static/css/main.8f561d9c.css",
+    "main.js": "/static/js/main.a2f1a855.js",
+    "static/js/787.c4e7f8f9.chunk.js": "/static/js/787.c4e7f8f9.chunk.js",
+    "static/media/art1.avif": "/static/media/art1.86d32f7761865105f99d.avif",
+    "static/media/shopmw.png": "/static/media/shopmw.bc938ed0014a032a3b14.png",
+    "static/media/art2.webp": "/static/media/art2.a51bd5314cbddc23c9bb.webp",
+    "static/media/fa-solid-900.ttf": "/static/media/fa-solid-900.4a2cd718d7031b732e76.ttf",
+    "static/media/women.png": "/static/media/women.cb434ea0273de574f128.png",
+    "static/media/men.png": "/static/media/men.6afade0132b46a302f76.png",
+    "static/media/art3.jpg": "/static/media/art3.27ea43783de18576b253.jpg",
+    "static/media/footerdesktop-strip.jpg": "/static/media/footerdesktop-strip.ee8c5a3aff848de3a016.jpg",
+    "static/media/fa-brands-400.ttf": "/static/media/fa-brands-400.150de8eaa454d669c405.ttf",
+    "static/media/c01.jpg": "/static/media/c01.7aac85452ab1043a76bf.jpg",
+    "static/media/art4.webp": "/static/media/art4.0e22e9562fad0fa5c09d.webp",
+    "static/media/fa-solid-900.woff2": "/static/media/fa-solid-900.bb975c966c37455a1bc3.woff2",
+    "static/media/c04.jpg": "/static/media/c04.945d00ef8c290fbaf8c3.jpg",
+    "static/media/c031.jpg": "/static/media/c031.d4e014892c8ac5ca5447.jpg",
+    "static/media/polo1.jpg": "/static/media/polo1.417bc6eac30934efb5f6.jpg",
+    "static/media/fa-brands-400.woff2": "/static/media/fa-brands-400.e033a13ee751afc1860c.woff2",
+    "static/media/oversized2.jpg": "/static/media/oversized2.2ce25dc014faafd1b942.jpg",
+    "static/media/anime1.webp": "/static/media/anime1.ced1ab46794b159c2865.webp",
+    "static/media/c021.jpg": "/static/media/c021.9a175b599cd768e9d5e4.jpg",
+    "static/media/fa-regular-400.ttf": "/static/media/fa-regular-400.d87474231f4192884802.ttf",
+    "static/media/carosel1.webp": "/static/media/carosel1.747fc96d03377bd16882.webp",
+    "static/media/fa-regular-400.woff2": "/static/media/fa-regular-400.3223dc79c1adee56370b.woff2",
+    "static/media/review.png": "/static/media/review.2e92605735006384133b.png",
+    "static/media/art5.jpg": "/static/media/art5.d93ed124a585d1fc8b58.jpg",
+    "static/media/hoodie2.jpg": "/static/media/hoodie2.7d00d1048def1c6ff495.jpg",
+    "static/media/art6.jpg": "/static/media/art6.be9b1c2cfa546d1dfe00.jpg",
+    "static/media/fa-v4compatibility.ttf": "/static/media/fa-v4compatibility.0e3a648be390bd8cb094.ttf",
+    "static/media/fa-v4compatibility.woff2": "/static/media/fa-v4compatibility.68577e40f3e70067b5da.woff2",
+    "index.html": "/index.html",
+    "main.8f561d9c.css.map": "/static/css/main.8f561d9c.css.map",
+    "main.a2f1a855.js.map": "/static/js/main.a2f1a855.js.map",
+    "787.c4e7f8f9.chunk.js.map": "/static/js/787.c4e7f8f9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8f561d9c.css",
+    "static/js/main.a2f1a855.js"
+  ]
+}
