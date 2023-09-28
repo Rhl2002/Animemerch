@@ -38,7 +38,8 @@ app.use('/api/v1/cart',cartRoutes);
 
 //rest api
 app.get("/", (req, res) => {
-  res.send("<h1>Welcome to ecommerce app</h1>");
+  res.json("Hello");
+  // res.send("<h1>Welcome to ecommerce app</h1>");
 });
 
 //PORT
