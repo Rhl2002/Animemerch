@@ -20,14 +20,9 @@ const app = express();
 
 //middelwares
 // app.use(cors());
-app.use(cors(
-  {
-      origin: ["https://deploy-mern-frontend.vercel.app"],
-      methods: ["POST", "GET","PUT","DELETE"],
-      credentials: true
-  }
-));
+app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(morgan("dev"));
 
 //routes
@@ -44,11 +39,14 @@ app.get("/", (req, res) => {
 
 //PORT
 const PORT = process.env.PORT || 8080;
-
+const server = http.createServer(app);
 //run listen
-app.listen(PORT, () => {
-  console.log(
-    `Server Running on ${process.env.DEV_MODE} mode on port ${PORT}`.bgCyan
-      .white
-  );
+server.listen(PORT, () => {
+  console.log(`Server is listening on port ${port}`);
 });
+// app.listen(PORT, () => {
+//   console.log(
+//     `Server Running on ${process.env.DEV_MODE} mode on port ${PORT}`.bgCyan
+//       .white
+//   );
+// });
