@@ -212,3 +212,29 @@ export const deleteCartController = async (req, res) => {
     });
   }
 };
+
+
+export const clearCartController = async (req, res) => {
+  try {
+    const { id } = req.params;
+    let cart = await cartModel.find({ userid: id });
+
+    cart[0].products.length=0;
+
+      await cart[0].save();
+      cart = await cartModel.find({ userid: id });
+      res.status(200).send({
+        success: true,
+        message: "Product Deleted Successfully",
+        cart,
+      });
+    } 
+   catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      error: error.message,
+      message: "Error while deleting whole products in cart ",
+    });
+  }
+};

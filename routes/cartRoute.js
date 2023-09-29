@@ -1,6 +1,6 @@
 import express from 'express';
 import { isAdmin, requireSignIn } from '../middlewares/authMiddleware.js';
-import { createCartController, deleteCartController, getCartController, updateCartController } from '../controllers/cartController.js';
+import { clearCartController, createCartController, deleteCartController, getCartController, updateCartController } from '../controllers/cartController.js';
 
 
 const router = express.Router();
@@ -18,5 +18,6 @@ router.post('/update-cart/:id/:pid',updateCartController);
 
 // deleting the entire product
 router.post('/delete-cart/:id/:pid',deleteCartController);
+router.post('/clear-cart/:id',clearCartController);
 
 export default router;
