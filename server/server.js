@@ -39,14 +39,14 @@ app.get("/", (req, res) => {
 
 //PORT
 const PORT = process.env.PORT || 8080;
-const server = http.createServer(app);
+// const server = http.createServer(app);
 //run listen
-server.listen(PORT, () => {
-  console.log(`Server is listening on port ${PORT}`);
-});
-// app.listen(PORT, () => {
-//   console.log(
-//     `Server Running on ${process.env.DEV_MODE} mode on port ${PORT}`.bgCyan
-//       .white
-//   );
+// server.listen(PORT, () => {
+//   console.log(`Server is listening on port ${PORT}`);
 // });
+app.listen(PORT, () => {
+  console.log(
+    `Server Running on ${process.env.DEV_MODE} mode on port ${PORT}`.bgCyan
+      .white
+  );
+});
