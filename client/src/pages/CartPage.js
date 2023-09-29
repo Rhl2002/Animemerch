@@ -149,8 +149,9 @@ const CartPage = () => {
         cart,
       });
       setLoading(false);
-      localStorage.removeItem("cart");
-      setCart([]);
+      localStorage.removeItem("cart"); 
+      await axios.post(`/api/v1/cart/clear-cart/${auth._id}`);
+      // setCart([]);
       navigate("/dashboard/user/orders");
       toast.success("Payment Completed Successfully ");
     } catch (error) {
@@ -207,13 +208,13 @@ const CartPage = () => {
                       
                       <div className="d-flex justify-content-between">
                       <button
-                        className="btn btn-primary p-3 "
+                        className="btn btn-primary p-3 d-flex"
                         onClick={() => removeCartItem(p[0]._id)}
                       >
                         Remove
                       </button>
                       <button
-                        className="btn btn-danger cart-remove-btn d-flex right-0 "
+                        className="btn btn-danger cart-remove-btn d-flex right-10 "
                         onClick={() => removeWholeCartItem(p[0]._id)}
                       >
                         Remove All
