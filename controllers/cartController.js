@@ -220,7 +220,7 @@ export const clearCartController = async (req, res) => {
     let cart = await cartModel.find({ userid: id });
 
     cart[0].products.splice(0,cart[0].products.length)
-
+    cart[0].total=0;
       await cart[0].save();
       cart = await cartModel.find({ userid: id });
       res.status(200).send({
