@@ -1,6 +1,7 @@
 {
   "name": "client",
   "proxy": "https://backend-glia.onrender.com",
+  "homepage":"https://backend-glia.onrender.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
