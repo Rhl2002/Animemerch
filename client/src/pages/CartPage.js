@@ -151,7 +151,7 @@ const CartPage = () => {
       setLoading(false);
       localStorage.removeItem("cart"); 
       await axios.post(`/api/v1/cart/clear-cart/${auth._id}`);
-      // setCart([]);
+      setCart(...cart);
       navigate("/dashboard/user/orders");
       toast.success("Payment Completed Successfully ");
     } catch (error) {
