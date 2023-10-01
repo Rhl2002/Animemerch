@@ -65,7 +65,7 @@ const Orders = () => {
           <div className="col-md-9">
             <h1 className="text-center">All Orders</h1>
             {orders?.map((o, i) => {
-              console.log()
+              // console.log()
               return (
                 <div className="border shadow">
                   <table className="table">
@@ -94,7 +94,7 @@ const Orders = () => {
                   </table>
                   <div className="container">
                     {my.map((p, i) => (
-                      console.log(p[0]),
+                      // console.log(p[0]),
                       <div className="row mb-2 p-3 card flex-row" key={p[0]._id}>
                         <div className="col-md-2">
                           <img
