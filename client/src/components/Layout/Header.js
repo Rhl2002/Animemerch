@@ -76,12 +76,12 @@ const Header = () => {
                   </li>
                   {categories?.map((c) => (
                     <li>
-                      <Link
+                      <NavLink
                         className="dropdown-item"
                         to={`/category/${c.slug}`}
                       >
                         {c.name}
-                      </Link>
+                      </NavLink>
                     </li>
                   ))}
                 </ul>
