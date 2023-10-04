@@ -143,7 +143,8 @@ const ProductDetails = () => {
                 <div className="card-name-price">
                   <button
                     className="btn btn-info ms-1"
-                    onClick={() => navigate(`/product/${p.slug}`)}
+                    onClick={() => {document.documentElement.scrollTop = 0;
+                       navigate(`/product/${p.slug}`)}}
                   >
                     More Details
                   </button>
