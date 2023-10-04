@@ -87,7 +87,7 @@ export default function Slider01() {
                         <div className="card mb-5 mt-3">
                             <div className="p-3 slider01">
                                 <img
-                                    src={`/api/v1/product/product-photo/${p._id}`}
+                                    src={`https://backend-glia.onrender.com/api/v1/product/product-photo/${p._id}`}
                                     className="card-img-top"
                                     alt={p.name}
                                     onClick={() => navigate(`/product/${p.slug}`)}

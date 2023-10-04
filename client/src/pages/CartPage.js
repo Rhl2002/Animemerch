@@ -190,7 +190,7 @@ const CartPage = () => {
                   <div className="row flex-row border p-2 m-2" key={p[0].name}>
                     <div className="col-md-4">
                       <img
-                        src={`/api/v1/product/product-photo/${p[0]._id}`}
+                        src={`https://backend-glia.onrender.com/api/v1/product/product-photo/${p[0]._id}`}
                         className="card-img-top"
                         alt={p[0].name}
                         // we can change this to fix the size issue of product in cartpage

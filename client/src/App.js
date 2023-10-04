@@ -28,7 +28,7 @@ import OurPartners from "./pages/OurPartners";
 function App() {
   return (
     <>
-      <Routes>
+      <Routes> 
         <Route path="/" element={<HomePage />} />
         <Route path="/product/:slug" element={<ProductDetails />} />
         <Route path="/categories" element={<Categories />} />

@@ -98,7 +98,7 @@ const Orders = () => {
                       <div className="row mb-2 p-3 card flex-row" key={p[0]._id}>
                         <div className="col-md-2">
                           <img
-                            src={`/api/v1/product/product-photo/${p[0]._id}`}
+                            src={`https://backend-glia.onrender.com/api/v1/product/product-photo/${p[0]._id}`}
                             className="card-img-top"
                             alt={p._id}
                           />
@@ -117,7 +117,7 @@ const Orders = () => {
                       <div className="row mb-2 p-3 card flex-row" key={p._id}>
                         <div className="col-md-2">
                           <img
-                            src={`/api/v1/product/product-photo/${p.productid}`}
+                            src={`https://backend-glia.onrender.com/api/v1/product/product-photo/${p.productid}`}
                             className="card-img-top"
                             alt={p.productid}
                           />
