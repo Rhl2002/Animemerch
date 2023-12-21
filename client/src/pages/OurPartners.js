@@ -8,6 +8,9 @@ import art3 from './../assets/art3.jpg'
 import art4 from './../assets/art4.webp'
 import art5 from './../assets/art5.jpg'
 import art6 from './../assets/art6.jpg'
+import art7 from './../assets/art7.jpg'
+import art8 from './../assets/art8.jpg'
+import art9 from './../assets/art9.jpg'
 
 const OurPartners = () => {
   return (
@@ -23,8 +26,12 @@ const OurPartners = () => {
       <Col className=' m-2'><h3 className='d-flex justify-content-center mx-auto'>Shivam J.</h3><img src={art4} alt='asdf' className='card d-flex justify-content-center mx-auto w-50'/></Col>
       <Col className=' m-2'><h3 className='d-flex justify-content-center mx-auto'>Shivam J.</h3><img src={art5} alt='asdf' className='card d-flex justify-content-center mx-auto w-50'/></Col>
       <Col className=' m-2'><h3 className='d-flex justify-content-center mx-auto'>Shivam J.</h3><img src={art6} alt='asdf' className='card d-flex justify-content-center mx-auto w-50'/></Col>
+    </Row>
 
-
+    <Row className='mt-5'>
+      <Col className=' m-2'><h3 className='d-flex justify-content-center mx-auto'>Shivam J.</h3><img src={art7} alt='asdf' className='card d-flex justify-content-center mx-auto w-50'/></Col>
+      <Col className=' m-2'><h3 className='d-flex justify-content-center mx-auto'>Shivam J.</h3><img src={art8} alt='asdf' className='card d-flex justify-content-center mx-auto w-50'/></Col>
+      <Col className=' m-2'><h3 className='d-flex justify-content-center mx-auto'>Shivam J.</h3><img src={art9} alt='asdf' className='card d-flex justify-content-center mx-auto w-50'/></Col>
     </Row>
   </Container>
   );
