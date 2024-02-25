@@ -5,15 +5,16 @@ import { useAuth } from "../context/auth";
 import { useNavigate } from "react-router-dom";
 import DropIn from "braintree-web-drop-in-react";
 import axios from "axios";
-import {toast} from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import "../styles/CartStyles.css";
-
+import { loadStripe } from "@stripe/stripe-js";
 const CartPage = () => {
   const [auth, setAuth] = useAuth();
   const [cart, setCart] = useCart();
   const [clientToken, setClientToken] = useState("");
   const [instance, setInstance] = useState("");
   const [loading, setLoading] = useState(false);
+  const [myproducts, setMyProducts] = useState([]);
   const navigate = useNavigate();
   const [my, setMy] = useState([]);
   var products = [];
@@ -23,6 +24,7 @@ const CartPage = () => {
       // console.log("app product function")
       // cart  must be array but here it is a object
       // console.log("cart is from cartpage " , cart);
+
       for (let i = 0; i < cart[0]?.products?.length; i++) {
         let id = cart[0]?.products[i]?.productid;
         let pro = [];
@@ -40,6 +42,7 @@ const CartPage = () => {
           // }
           pro.push(product.data.product);
           products.push(pro);
+          setMyProducts(products);
           // setMy((prev) => [...prev, pro]);
         } else {
           // closenotif(id);
@@ -59,7 +62,6 @@ const CartPage = () => {
     // window.location.reload();
     //setMy(...products);
   }, [cart]);
-
 
   //total price
   const totalPrice = () => {
@@ -128,39 +130,91 @@ const CartPage = () => {
     }
   };
   //get payment gateway token
-  const getToken = async () => {
-    try {
-      const { data } = await axios.get("/api/v1/product/braintree/token");
-      setClientToken(data?.clientToken);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    getToken();
-  }, [auth?.token]);
+  // const getToken = async () => {
+  //   try {
+  //     const { data } = await axios.get("/api/v1/product/braintree/token");
+  //     setClientToken(data?.clientToken);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+  // useEffect(() => {
+  //   getToken();
+  // }, [auth?.token]);
 
   //handle payments
+  // const handlePayment = async () => {
+  //   try {
+  //     setLoading(true);
+  //     const { nonce } = await instance.requestPaymentMethod();
+  //     const { data } = await axios.post("/api/v1/product/braintree/payment", {
+  //       nonce,
+  //       cart,
+  //     });
+  //     setLoading(false);
+  //     // localStorage.removeItem("cart");
+  //     await axios.post(`/api/v1/cart/clear-cart/${auth.user._id}`);
+  //     setCart(...cart);
+  //     getAllProducts();
+  //     navigate("/dashboard/user/orders");
+  //     toast.success("Payment Completed Successfully ");
+  //   } catch (error) {
+  //     console.log(error);
+  //     setLoading(false);
+  //   }
+  // };
   const handlePayment = async () => {
     try {
-      setLoading(true);
-      const { nonce } = await instance.requestPaymentMethod();
-      const { data } = await axios.post("/api/v1/product/braintree/payment", {
-        nonce,
-        cart, 
+      console.log(my);
+      // Load Stripe.js with your publishable key
+      const stripe = await loadStripe(
+        "pk_test_51OnZiRSBzHEdRRfThT3DpH3ynOIeXKLUGGAMzQLcOEC1JcmXroZj1lTRE4bMwlgqhICA7bHhv7WqDjLFvCqIc0Nl00Sk2wrSmY"
+      );
+
+      // Prepare request body
+      const body = {
+        products: my,
+      };
+
+      // Set request headers
+      const headers = {
+        "Content-Type": "application/json",
+      };
+
+      // Send a POST request to create a checkout session
+      const response = await fetch(
+        "http://localhost:8080/api/v1/product/create-checkout-session",
+        {
+          method: "POST",
+          headers: headers,
+          body: JSON.stringify(body),
+        }
+      );
+      console.log(response);
+      // Check if the response is successful
+      if (!response.ok) {
+        throw new Error("Failed to fetch session ID");
+      }
+
+      // Parse the response body to get the session ID
+      const session = await response.json();
+      console.log(response);
+
+      // Redirect to Stripe Checkout
+      const result = await stripe.redirectToCheckout({
+        sessionId: session.id,
       });
-      setLoading(false);
-      // localStorage.removeItem("cart");
-      await axios.post(`/api/v1/cart/clear-cart/${auth.user._id}`);
-      setCart(...cart);
-      getAllProducts();
-      navigate("/dashboard/user/orders");
-      toast.success("Payment Completed Successfully ");
+
+      // Check for any errors during redirection
+      if (result.error) {
+        throw new Error(result.error.message);
+      }
     } catch (error) {
-      console.log(error);
-      setLoading(false);
+      console.error(error);
+      // Handle error (e.g., display error message to user)
     }
   };
+
   return (
     <Layout>
       {/* wrapping everything with auth so if user is not login he will not be shown cart page */}
@@ -209,21 +263,19 @@ const CartPage = () => {
                       <p>Quantity : {cart[0]?.products[idx]?.quantity}</p>
 
                       <button
-                    className="btn btn-primary "
-                    onClick={() => removeCartItem(p[0]._id)}
-                  >
-                    Remove
-                  </button>
-                  <button
-                    className="btn btn-danger cart-remove-btn "
-                    onClick={() => removeWholeCartItem(p[0]._id)}
-                  >
-                    Remove All
-                  </button>
+                        className="btn btn-primary "
+                        onClick={() => removeCartItem(p[0]._id)}
+                      >
+                        Remove
+                      </button>
+                      <button
+                        className="btn btn-danger cart-remove-btn "
+                        onClick={() => removeWholeCartItem(p[0]._id)}
+                      >
+                        Remove All
+                      </button>
                     </div>
-                    <div className="col-md-4 cart-remove-btn">
-                      
-                    </div>
+                    <div className="col-md-4 cart-remove-btn"></div>
                   </div>
                 ))}
               </div>
@@ -269,29 +321,13 @@ const CartPage = () => {
                   </div>
                 )}
                 <div className="mt-2">
-                  {!clientToken  ? (
-                    ""
-                  ) : (
-                    <>
-                      <DropIn
-                        options={{
-                          authorization: clientToken,
-                          paypal: {
-                            flow: "vault",
-                          },
-                        }}
-                        onInstance={(instance) => setInstance(instance)}
-                      />
-
-                      <button
-                        className="btn btn-success py-2 px-5"
-                        onClick={handlePayment}
-                        disabled={loading || !instance || !auth?.user?.address}
-                      >
-                        {loading ? "Processing ...." : "Make Payment"}
-                      </button>
-                    </>
-                  )}
+                  <button
+                    className="btn btn-success py-2 px-5"
+                    onClick={handlePayment}
+                    // disabled={loading || !instance || !auth?.user?.address}
+                  >
+                    Make Payment
+                  </button>
                 </div>
               </div>
             </div>

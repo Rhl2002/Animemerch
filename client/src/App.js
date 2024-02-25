@@ -25,6 +25,8 @@ import CartPage from "./pages/CartPage";
 import AdminOrders from "./pages/Admin/AdminOrders";
 import PhoneSignUp from "./pages/Auth/PhoneSignUp";
 import OurPartners from "./pages/OurPartners";
+import Success from "./pages/Success";
+import Cancel from "./pages/Cancel";
 function App() {
   return (
     <>
@@ -57,6 +59,8 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<Pagenotfound />} />
+        <Route path="/success" element={<Success />} />
+        <Route path="/cancel" element={<Cancel />} />
       </Routes>
     </>
   );

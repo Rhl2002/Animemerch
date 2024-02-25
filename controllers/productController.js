@@ -6,6 +6,8 @@ import fs from "fs";
 import slugify from "slugify";
 import braintree from "braintree";
 import dotenv from "dotenv";
+import stripe from 'stripe';
+const stripeInstance = new stripe("sk_test_51OnZiRSBzHEdRRfT2G3WnkCOunDIRhxvgMWvfcJyOBOSdHE1IaEeOp04zBNvlXH5y9HCGzb5n5iU60XOr4c0jYj7003OALjhKC");
 
 dotenv.config();
 
@@ -400,5 +402,41 @@ export const brainTreePaymentController = async (req, res) => {
       error,
       message: "Error in Payment Controller",
     });
+  }
+};
+
+export const paymentController = async (req, res) => {
+  try {
+    const { products } = req.body;
+    console.log(products)
+
+    if (!Array.isArray(products) || products.length === 0) {
+      return res.status(400).json({ error: 'Products array is empty or missing' });
+    }
+
+    const lineItems = products.map((product) => ({
+      price_data: {
+        currency: "INR",
+        product_data: {
+          name: product.name,
+          images: [product.image], // Ensure image is wrapped in an array
+        },
+        unit_amount: Math.round(product.price * 100)
+      },
+      quantity: product.quantity
+    }));
+
+    const session = await stripeInstance.checkout.sessions.create({
+      payment_method_types: ["card"],
+      line_items: lineItems,
+      mode: "payment",
+      success_url: "http://localhost:3000/success",
+      cancel_url: "http://localhost:3000/cancel"
+    });
+
+    res.json({ id: session.id });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 };
